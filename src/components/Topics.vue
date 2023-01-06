@@ -6,10 +6,10 @@
       <Topic 
          :topic=topic
          @delete-topic="$emit('delete-topic',topic.guid)"
-      />
+         />
     </div>
 </template>
-
+ 
 <script>
 import Topic from './Topic.vue'
 export default {

@@ -6,18 +6,14 @@
         <div class="form-control">
             <label>Topic</label>
             <input 
-                type="text" 
-                v-model="name"
-                name="name"
+                v-model="topicName"
                 placeholder="Add Topic"
             />
         </div>
         <div class="form-control">
             <label>Comment</label>
             <input 
-                type="comments" 
-                v-model="comments"
-                name="day"
+                v-model="topicComment"
                 placeholder="Add comment"
             />
         </div>
@@ -35,32 +31,31 @@ export default {
     name: 'AddTopic',
     data() {
         return {
-            name: '',
-            comments: '',
+            topicName: '',
+            topicComment: '',
         }
     },
     methods: {
         onSubmit(e) {
             e.preventDefault()
 
-            if(!this.name) {
-                alert('Please add a topic')
-                return
-            }
-            else if(!this.comments) {
-                alert('Please add a comment')
+            if(!this.topicName || !this.topicComment) {
+                alert('Please add a topic and comment')
                 return
             }
 
             const newTopic = {
-                // id: Math.floor(Math.random() * 100000),
-                name: this.name,
-                comments: this.comments,
+                name: this.topicName,
+                comments: [{ comment:this.topicComment }],
+                date: new Date(),
+                guid: Math.floor(Math.random() * 100000)
             }
 
+            console.log(newTopic)
+
             this.$emit('add-topic', newTopic)
-            this.name=''
-            this.comments=''
+            this.topicName=''
+            this.topicComment=''
         }
     }
 }

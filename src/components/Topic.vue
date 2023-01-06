@@ -1,13 +1,18 @@
 <template>
     <div class="topic">
-      <h3>topic: {{ topic.name }}
-        <i 
-                class="fas fa-times"
-                @click="onDelete(topic.guid)"
-        >   
-        </i> 
-    </h3>
-      <p>comment: {{ topic.comments }}</p>
+        <h3>topic: {{ topic.name }}
+            <i 
+                    class="fas fa-times"
+                    @click="onDelete(topic.guid)"
+            >   
+            </i> 
+        </h3>
+        <div 
+            v-for="comment in topic.comments"
+            :key="comment.date" 
+        >
+            <p>comment: {{ comment.comment }} </p>
+        </div>
     </div>
 </template>
 
@@ -15,7 +20,7 @@
 export default {
     name: 'MyTopic',
     props: {
-        topic: Object
+        topic: Object,
     },
     methods: {
         onDelete(guid) {

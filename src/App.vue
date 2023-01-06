@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h1>Vue 3 Topic App:</h1>
+    <h1>Topic & Comments App:</h1>
     <!-- <Button>Create</Button> -->
-    <AddTopic @add-topic="addTopic"/>
+    <AddTopic @add-topic="addTopic" />
     <Topics @delete-topic="deleteTopic" :topics="topics"/>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   components: {
     // Button,
     Topics,
-    AddTopic,
+    AddTopic, 
   },
   data() {
     return {
@@ -25,40 +25,16 @@ export default {
     }
   },
   methods: {
-    addTopic(topic){
-      this.topics = [...this.topics, topic]
+
+    addTopic(newTopic){
+      console.log(newTopic)
+      this.topics = [newTopic, ...this.topics ]
+      console.log(this.topics)
     },
-
-
-    // async addTopic(topic) {
-    //   const res = await fetch('api/topics', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-type': 'application/json',
-    //     },
-    //     body: JSON.stringify(topic),
-    //   })
-
-    //   const data = await res.json()
-        
-    //   this.topics = [...this.topics, data]
-    // },
-
-
+ 
     deleteTopic(guid){
       this.topics = this.topics.filter((topic) => topic.guid !== guid)
     },
-
-
-    // async deleteTopic(guid){
-    //   if (confirm('Are you sure?')) {
-    //     const res = await fetch(`api/topics/${guid}`, {
-    //       method: 'DELETE'
-    //     })
-    //     res.status === 200 ? (this.topics = this.topics.filter((topic)=>topic.guid !== guid)) 
-    //     : alert('Error deleting topics')
-    //   }
-    // },
 
     async fetchTopics() {
       const res = await fetch('api/topics')
